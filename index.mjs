@@ -35,7 +35,7 @@ app.post('/api/users' , (req, res) => {
 //PUT REQUEST update data
 
 app.put('/api/users/:id', (req, res) => {
-    
+
     const id = req.params.id; // Get the ID from the request parameters
     const name = req.body.name; // Get name from the request body
     const email = req.body.email; // Get email from the request body
@@ -49,7 +49,9 @@ app.put('/api/users/:id', (req, res) => {
     }
 
     // Update user properties if provided
+
     if (name) users[userIndex].name = name; // Update name if provided
+    
     if (email) users[userIndex].email = email; // Update email if provided
 
     // Respond with the updated user
