@@ -51,7 +51,7 @@ app.put('/api/users/:id', (req, res) => {
     // Update user properties if provided
 
     if (name) users[userIndex].name = name; // Update name if provided
-    
+
     if (email) users[userIndex].email = email; // Update email if provided
 
     // Respond with the updated user
@@ -60,6 +60,30 @@ app.put('/api/users/:id', (req, res) => {
         data: users[userIndex]
     });
 });
+ 
+// DELETE request - Remove a user by ID
+
+app.delete('/api/users/:id', (req, res) => {
+    const id = req.params.id; // Get the ID from the request parameters
+
+    // Find the index of the user by ID
+    const userIndex = users.findIndex(user => user.id === parseInt(id));
+
+    // Check if user exists
+    if (userIndex === -1) {
+        return res.status(404).json({ message: 'User not found.' });
+    }
+
+    // Remove the user from the array
+    const deletedUser = users.splice(userIndex, 1); // Removes the user and returns it
+
+    // Respond with the deleted user
+    res.json({
+        message: 'User deleted successfully!',
+        data: deletedUser[0] // Return the deleted user object
+    });
+});
+
 
 // start the server
 app.listen(PORT, () => {
