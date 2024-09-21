@@ -16,7 +16,7 @@ let users = [
 //GET request or get all items
 
 app.get('/api/users', (req, res) => {
-    res.status(200).json({ message: 'GET request - Fetching all items' });
+    res.status(200).json({ message: 'GET request - Fetching all items' , data:  users });
 })
 
 
