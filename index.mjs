@@ -19,6 +19,16 @@ app.get('/api/users', (req, res) => {
     res.status(200).json({ message: 'GET request - Fetching all items' , data:  users });
 })
 
+// POST request - Create a new item
+app.post('/api/users' , (req, res) => {
+    const newItem = {
+        id: users.length + 1,
+        name: req.body.name
+    };
+   users.push(newItem);
+    res.status(201).json({message: 'POST request - new item is created' , data:  users});
+});
+
 
 // start the server
 app.listen(PORT, () => {
