@@ -32,7 +32,32 @@ app.post('/api/users' , (req, res) => {
    users.push(newItem);
     res.status(201).json({message: 'POST request - new item is created' , data: newItem});
 });
+//PUT REQUEST update data
 
+app.put('/api/users/:id', (req, res) => {
+    
+    const id = req.params.id; // Get the ID from the request parameters
+    const name = req.body.name; // Get name from the request body
+    const email = req.body.email; // Get email from the request body
+
+    // Find the user by ID
+    const userIndex = users.findIndex(user => user.id === parseInt(id));
+    
+    // Check if user exists
+    if (userIndex === -1) {
+        return res.status(404).json({ message: 'User not found.' });
+    }
+
+    // Update user properties if provided
+    if (name) users[userIndex].name = name; // Update name if provided
+    if (email) users[userIndex].email = email; // Update email if provided
+
+    // Respond with the updated user
+    res.json({
+        message: 'User updated successfully!',
+        data: users[userIndex]
+    });
+});
 
 // start the server
 app.listen(PORT, () => {
